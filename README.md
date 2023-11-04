@@ -57,7 +57,7 @@ Next in the pseudo graphical interface
 ![7](./images/7.png)
 ![8](./images/8.png)
 
-Waiting for network connection before starting the system
+### Waiting for network connection before starting the system
 ![9](./images/9.png)
 ![10](./images/10.png)
 
