@@ -8,6 +8,10 @@
 * Alfa Network AWUS036ACH-C
 * Samsung PRO Plus microSDXC 128Gb
 
+## Software
+
+* berate_ap (https://www.kali.org/tools/berate-ap/)
+
 ## Installing Kali Linux on Raspberry-Pi
 
 Download Kali Linux image: https://www.kali.org/get-kali/#kali-arm
