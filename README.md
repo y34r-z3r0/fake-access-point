@@ -1,3 +1,7 @@
+## To Do
+
+- [ ] tcpdump automation log
+
 # Fake Access Point
 ![0](./images/0.jpg)
 
@@ -21,13 +25,13 @@ Download Raspberry-Pi Imager: https://www.raspberrypi.com/software/
 Open the Raspberry-Pi Imager application.
 ![1](./images/1.png)
 
-Click `CHOOSE STORAGE` and select our SD card.
+Click `CHOOSE STORAGE` and select SD card.
 ![2](./images/2.png)
 
-Click `CHOOSE OS`, scroll down and then click Use Custom. Select the previously downloaded Kali Linux image in .xz format (no need to unpack the archive!).
+Click `CHOOSE OS`, scroll down and then click `Use Custom`. Select the previously downloaded Kali Linux image in .xz format (no need to unpack the archive!).
 ![3](./images/3.png)
 
-Click on the gear icon and enable SSH.
+Click on the gear icon and then enable SSH.
 ![4](./images/4.png)
 
 Below in the same section set the login/password. For example you can use kali/kali.
@@ -50,7 +54,7 @@ dpkg -i raspi-config_20160322_all.deb
 dpkg -i rpi-update_20140705_all.deb
 ```
 
-## Changing system startup options
+## Changing system boot options
 ### Disabling GUI
 
 ```
@@ -61,7 +65,7 @@ Next in the pseudo graphical interface
 ![7](./images/7.png)
 ![8](./images/8.png)
 
-### Waiting for network connection before starting the system
+### Waiting for network connection before boot the system
 ![9](./images/9.png)
 ![10](./images/10.png)
 
