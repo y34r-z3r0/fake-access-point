@@ -1,6 +1,3 @@
-## To Do
-
-- [ ] tcpdump automation log
 
 # Fake Access Point
 ![0](./images/0.jpg)
