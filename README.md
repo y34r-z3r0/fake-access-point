@@ -8,6 +8,7 @@
 - [x] Install wi-fi driver
 - [x] Install aircrack
 - [x] Install berate_ap
+- [ ] Install eaphammer
 - [ ] Set up Management Access Point (MAP)
 - [ ] Set up Fake Access Point (FAP)
 - [ ] Set up launch on boot MAP and FAP
@@ -156,3 +157,31 @@ cd ber*
 ```
 make install
 ```
+
+#### Step 8: EAPHAMMER
+
+Source: https://github.com/s0lst1c3/eaphammer
+
+```
+sudo apt install apache2 libnfnetlink-dev libcurl4-openssl-dev python3-pip -y
+```
+```
+git clone https://github.com/s0lst1c3/eaphammer.git
+```
+```
+cd eap*
+```
+```
+sudo ./raspbian-setup
+```
+
+> [!WARNING]
+> If, when running ./eaphammer, you encounter problems with missing modules, you will need to install them manually.
+>
+> Like this:
+>
+> `pip3 install pywebcopy --break-system-packages`
+>
+> Or this:
+>
+> `sudo apt install python3-pywebcopy`
