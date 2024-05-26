@@ -6,9 +6,9 @@
 - [x] Install Ubuntu Server on SD
 - [ ] Change system boot options ?
 - [x] Install wi-fi driver
-- [ ] Install aircrack
+- [x] Install aircrack
+- [x] Install berate_ap
 - [ ] Set up Management Access Point (MAP)
-- [ ] Make a certs for FAP
 - [ ] Set up Fake Access Point (FAP)
 - [ ] Set up launch on boot MAP and FAP
 
@@ -138,4 +138,21 @@ make
 ```
 ```
 sudo make install
+```
+
+#### Step 7: BERATE_AP
+
+Source: https://github.com/sensepost/berate_ap
+
+```
+sudo apt install haveged dnsmasq -y
+```
+```
+git clone https://github.com/sensepost/berate_ap
+```
+```
+cd ber*
+```
+```
+make install
 ```
