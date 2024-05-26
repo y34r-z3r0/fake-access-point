@@ -107,34 +107,35 @@ sed -i 's/^MAKE="/MAKE="ARCH=arm64\ /' dkms.conf
 ```
 sudo make dkms_install
 ```
-
-Success output:
-
-```
-mkdir: created directory '/usr/src/8812au-5.6.4.2_35491.20191025'
-cp -r * /usr/src/8812au-5.6.4.2_35491.20191025
-dkms add -m 8812au -v 5.6.4.2_35491.20191025
-Creating symlink /var/lib/dkms/8812au/5.6.4.2_35491.20191025/source -> /usr/src/8812au-5.6.4.2_35491.20191025
-dkms build -m 8812au -v 5.6.4.2_35491.20191025
-Sign command: /usr/bin/kmodsign
-Binary update-secureboot-policy not found, modules won't be signed
-
-Building module:
-Cleaning build area...
-ARCH=arm64 'make' -j4 KVER=6.8.0-1004-raspi KSRC=/lib/modules/6.8.0-1004-raspi/build......................................
-Cleaning build area...
-dkms install -m 8812au -v 5.6.4.2_35491.20191025
-
-88XXau.ko.zst:
-Running module version sanity check.
- - Original module
-   - No original module exists within this kernel
- - Installation
-   - Installing to /lib/modules/6.8.0-1004-raspi/updates/dkms/
-depmod....
-dkms status -m 8812au
-8812au/5.6.4.2_35491.20191025, 6.8.0-1004-raspi, aarch64: installed
-```
 ```
 sudo reboot
+```
+
+#### Step 6: AIRCRACK
+
+Source: https://github.com/aircrack-ng/aircrack-ng
+
+```
+sudo apt install build-essential autoconf automake libtool pkg-config libnl-3-dev libnl-genl-3-dev libssl-dev ethtool shtool rfkill zlib1g-dev libpcap-dev libsqlite3-dev libpcre2-dev libhwloc-dev libcmocka-dev hostapd wpasupplicant tcpdump screen iw usbutils expect
+```
+```
+git clone https://github.com/aircrack-ng/aircrack-ng.git
+```
+```
+cd air*
+```
+```
+autoreconf -i
+```
+```
+./autogen.sh
+```
+```
+./configure
+```
+```
+make
+```
+```
+sudo make install
 ```
