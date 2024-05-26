@@ -3,10 +3,10 @@
 ### To Do
 
 - [ ] Description
-- [ ] Install Ubuntu Server on SD
-- [ ] Update, add Kali repos and install software
+- [x] Install Ubuntu Server on SD
 - [ ] Change system boot options ?
-- [ ] Set up Wi-Fi adapter
+- [x] Install wi-fi driver
+- [ ] Install aircrack
 - [ ] Set up Management Access Point (MAP)
 - [ ] Make a certs for FAP
 - [ ] Set up Fake Access Point (FAP)
@@ -67,3 +67,74 @@ Before you can connect, you must complete the steps in [THESE INSTRUCTIONS](http
 
 > [!WARNING]
 > I have seen cases where custom settings are ignored and the system is created with ubuntu:ubuntu credentials. Therefore, if you cannot log in with the credentials you specified, use ubuntu:ubuntu.
+
+## Install the software
+
+#### Step 4: Update & Upgrade
+
+First of all, let's update the current packages.
+
+```
+sudo apt update && sudo apt upgrade -y
+```
+
+#### Step 5: RTL8812AU
+
+
+Source: https://github.com/aircrack-ng/rtl8812au
+
+```
+sudo apt install dkms linux-headers-6.8.0-1004-raspi wireless-tools -y
+```
+```
+git clone -b v5.6.4.2 https://github.com/aircrack-ng/rtl8812au.git
+```
+```
+cd rtl*
+```
+```
+sed -i 's/CONFIG_PLATFORM_I386_PC = y/CONFIG_PLATFORM_I386_PC = n/g' Makefile
+```
+```
+sed -i 's/CONFIG_PLATFORM_ARM64_RPI = n/CONFIG_PLATFORM_ARM64_RPI = y/g' Makefile
+```
+```
+export ARCH=arm64
+```
+```
+sed -i 's/^MAKE="/MAKE="ARCH=arm64\ /' dkms.conf
+```
+```
+sudo make dkms_install
+```
+
+Success output:
+
+```
+mkdir: created directory '/usr/src/8812au-5.6.4.2_35491.20191025'
+cp -r * /usr/src/8812au-5.6.4.2_35491.20191025
+dkms add -m 8812au -v 5.6.4.2_35491.20191025
+Creating symlink /var/lib/dkms/8812au/5.6.4.2_35491.20191025/source -> /usr/src/8812au-5.6.4.2_35491.20191025
+dkms build -m 8812au -v 5.6.4.2_35491.20191025
+Sign command: /usr/bin/kmodsign
+Binary update-secureboot-policy not found, modules won't be signed
+
+Building module:
+Cleaning build area...
+ARCH=arm64 'make' -j4 KVER=6.8.0-1004-raspi KSRC=/lib/modules/6.8.0-1004-raspi/build......................................
+Cleaning build area...
+dkms install -m 8812au -v 5.6.4.2_35491.20191025
+
+88XXau.ko.zst:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.8.0-1004-raspi/updates/dkms/
+depmod....
+dkms status -m 8812au
+8812au/5.6.4.2_35491.20191025, 6.8.0-1004-raspi, aarch64: installed
+```
+```
+sudo reboot
+```
